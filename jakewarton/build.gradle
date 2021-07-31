@@ -54,6 +54,8 @@ android {
 dependencies {
     implementation project(":base")
 
+    implementation deps.barcode_scanner
+
     implementation deps.hilt.android
     kapt deps.hilt.compiler
 }
