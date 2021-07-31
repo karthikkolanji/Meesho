@@ -81,6 +81,9 @@ dependencies {
 
     api deps.timber
 
+    implementation deps.glide.runtime
+    kapt deps.glide.compiler
+
     api deps.navigation.fragment
     api deps.navigation.fragment_ktx
     api deps.navigation.ui
