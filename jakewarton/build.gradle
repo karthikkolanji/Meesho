@@ -54,6 +54,9 @@ android {
 dependencies {
     implementation project(":base")
 
+    implementation (deps.barcode_scanner.zxing_embeded){transitive = false}
+    implementation deps.barcode_scanner.zxing
+
     implementation deps.hilt.android
     kapt deps.hilt.compiler
 }
