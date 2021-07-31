@@ -88,3 +88,9 @@ lint/tmp/
 # Android Profiling
 *.hprof
 /app/prodFlavour/release/output-metadata.json
+/.idea/.gitignore
+/.idea/compiler.xml
+/gradle/wrapper/gradle-wrapper.jar
+/gradlew
+/gradlew.bat
+/.idea/misc.xml
