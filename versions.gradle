@@ -21,7 +21,6 @@ versions.timber = "4.7.1"
 versions.hilt = "2.35"
 versions.work = "2.4.0"
 versions.gson = "2.8.7"
-versions.zxing = "3.3.0"
 ext.versions = versions
 
 def build_versions = [:]
@@ -139,8 +138,6 @@ deps.room = room
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 
 deps.transition = "androidx.transition:transition:$versions.transition"
-
-deps.barcode_scanner = "com.google.zxing:core:$versions.zxing"
 
 
 ext.deps = deps
