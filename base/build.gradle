@@ -32,11 +32,11 @@ android {
 
         prodFlavour {
             dimension 'flavor'
-            buildConfigField "String", "BASE_URL", ""
+            buildConfigField "String", "BASE_URL", "\"https://en478jh796m7w.x.pipedream.net/\""
         }
         stagFlavour {
             dimension 'flavor'
-            buildConfigField "String", "BASE_URL", ""
+            buildConfigField "String", "BASE_URL", "\"https://en478jh796m7w.x.pipedream.net/\""
         }
     }
     compileOptions {

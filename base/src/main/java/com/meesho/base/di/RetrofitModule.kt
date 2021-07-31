@@ -1,5 +1,6 @@
 package com.meesho.base.di
 
+import com.meesho.base.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
