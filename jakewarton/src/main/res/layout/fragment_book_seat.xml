@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+   <TextView
+       android:id="@+id/tvLocationDetails"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:textColor="@android:color/black"
+       android:textSize="@dimen/tv_large"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       android:text="@string/location_details" />
+
+   <TextView
+       android:id="@+id/tvLocationId"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:textColor="@android:color/black"
+       android:textSize="@dimen/tv_medium"
+       android:layout_marginTop="4dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/tvLocationDetails"
+       android:text="@string/location_id" />
+
+   <TextView
+       android:id="@+id/tvAddress"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:textColor="@android:color/black"
+       android:textSize="@dimen/tv_medium"
+       android:layout_marginTop="4dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/tvLocationId"
+       android:text="@string/address" />
+
+
+   <TextView
+       android:id="@+id/tvPrice"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:textColor="@android:color/black"
+       android:textSize="@dimen/tv_medium"
+       android:layout_marginTop="4dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/tvAddress"
+       android:text="@string/price" />
+
+   <TextView
+       android:id="@+id/tvDuration"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:textColor="@android:color/black"
+       android:textSize="@dimen/tv_medium"
+       android:layout_marginTop="4dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/tvPrice"
+       android:text="@string/duration" />
+
+
+   <TextView
+       android:id="@+id/tvTotalCharges"
+       android:layout_width="0dp"
+       android:layout_height="wrap_content"
+       android:textColor="@android:color/black"
+       android:textSize="@dimen/tv_medium"
+       android:layout_marginTop="4dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/tvDuration"
+       android:text="@string/total_charges" />
+
+   <Button
+       android:id="@+id/btBookSeat"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/scan_now"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
