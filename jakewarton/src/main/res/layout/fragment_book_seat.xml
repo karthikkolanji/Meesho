@@ -6,8 +6,6 @@
     android:layout_margin="@dimen/activity_margin"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
    <TextView
        android:id="@+id/tvLocationDetails"
        android:layout_width="0dp"

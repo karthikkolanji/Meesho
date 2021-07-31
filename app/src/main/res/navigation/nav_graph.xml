@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/bookSeatFragment"
         android:name="com.meesho.jakewarton.ui.BookSeatFragment"
-        android:label="fragment_options"
+        android:label="@string/library"
         tools:layout="@layout/fragment_book_seat">
     </fragment>
 
