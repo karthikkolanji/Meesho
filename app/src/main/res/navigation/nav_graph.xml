@@ -2,7 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/bookSeatFragment">
 
+    <fragment
+        android:id="@+id/bookSeatFragment"
+        android:name="com.meesho.jakewarton.ui.BookSeatFragment"
+        android:label="fragment_options"
+        tools:layout="@layout/fragment_book_seat">
+    </fragment>
 
 </navigation>
