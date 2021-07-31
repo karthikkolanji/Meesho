@@ -58,7 +58,8 @@ android {
 
 dependencies {
     implementation project(":base")
+    implementation project(":jakewarton")
 
-    api deps.hilt.android
+    implementation deps.hilt.android
     kapt deps.hilt.compiler
 }
