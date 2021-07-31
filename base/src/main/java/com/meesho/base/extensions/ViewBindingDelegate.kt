@@ -13,7 +13,7 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 // https://medium.com/@Zhuinden/simple-one-liner-viewbinding-in-fragments-and-activities-with-kotlin-961430c6c07c
-class FragmentViewBindingDelegate<T : ViewBinding>(
+class ViewBindingDelegate<T : ViewBinding>(
     val fragment: Fragment,
     val viewBindingFactory: (View) -> T
 ) : ReadOnlyProperty<Fragment, T> {
@@ -44,12 +44,12 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
             throw IllegalStateException("Should not attempt to get bindings when Fragment views are destroyed.")
         }
 
-        return viewBindingFactory(thisRef.requireView()).also { this@FragmentViewBindingDelegate.binding = it }
+        return viewBindingFactory(thisRef.requireView()).also { this.binding = it }
     }
 }
 
 fun <T : ViewBinding> Fragment.viewLifecycleScoped(viewBindingFactory: (View) -> T) =
-    FragmentViewBindingDelegate(this, viewBindingFactory)
+    ViewBindingDelegate(this, viewBindingFactory)
 
 inline fun <T : ViewBinding> AppCompatActivity.viewLifecycleScoped(
     crossinline bindingInflater: (LayoutInflater) -> T) =
