@@ -60,6 +60,8 @@ dependencies {
     implementation project(":base")
     implementation project(":jakewarton")
 
+    implementation deps.lifecycle.app
+
     implementation deps.hilt.android
     kapt deps.hilt.compiler
 }

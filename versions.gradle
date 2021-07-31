@@ -13,6 +13,7 @@ versions.fragment = "1.2.0"
 versions.glide = "4.12.0"
 versions.kotlin = "1.5.10"
 versions.lifecycle = "2.2.0"
+versions.arch_lifecycle = "1.1.1"
 versions.material = "1.0.0"
 versions.navigation = "2.3.5"
 versions.okhttp_logging_interceptor = "4.9.1"
@@ -87,6 +88,7 @@ lifecycle.java8 = "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle
 lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
 lifecycle.viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
 lifecycle.livedata_ktx = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle"
+lifecycle.app = "androidx.lifecycle:lifecycle-process:$versions.lifecycle"
 deps.lifecycle = lifecycle
 
 deps.material = "com.google.android.material:material:$versions.material"
