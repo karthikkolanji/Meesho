@@ -1,0 +1,10 @@
+<resources>
+    <string name="scan_now">Scan Now</string>
+    <string name="end">End</string>
+    <string name="location_details">Location Details</string>
+    <string name="address">Address : %1$s</string>
+    <string name="location_id">Location Id : %1$s</string>
+    <string name="price">Price : %1$s</string>
+    <string name="total_charges">Charges : %1$s</string>
+    <string name="duration">Hour: %1$s Minutes: %2$s Seconds: %3$s</string>
+</resources>
