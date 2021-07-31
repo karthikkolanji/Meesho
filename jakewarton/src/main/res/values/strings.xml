@@ -7,4 +7,5 @@
     <string name="price">Price : %1$s</string>
     <string name="total_charges">Charges : %1$s</string>
     <string name="duration">Hour: %1$s Minutes: %2$s Seconds: %3$s</string>
+    <string name="qr_read_error">Error in reading QR code!</string>
 </resources>
