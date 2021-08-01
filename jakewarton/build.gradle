@@ -64,4 +64,6 @@ dependencies {
     kapt (deps.room.compiler)
     implementation (deps.room.ktx)
 
+    implementation deps.apache_text
+
 }

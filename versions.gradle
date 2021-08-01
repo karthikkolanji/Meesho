@@ -24,6 +24,8 @@ versions.work = "2.4.0"
 versions.gson = "2.8.7"
 versions.zxing_embeded = "4.1.0"
 versions.zxing= "3.3.0"
+versions.room= "2.3.0"
+versions.apache_text= "1.6"
 ext.versions = versions
 
 def build_versions = [:]
@@ -141,6 +143,8 @@ deps.room = room
 deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 
 deps.transition = "androidx.transition:transition:$versions.transition"
+
+deps.apache_text = "org.apache.commons:commons-text:$versions.apache_text"
 
 def barcode_scanner = [:]
 barcode_scanner.zxing_embeded = "com.journeyapps:zxing-android-embedded:$versions.zxing_embeded"
