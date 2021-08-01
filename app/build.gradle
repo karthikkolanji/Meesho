@@ -64,4 +64,9 @@ dependencies {
 
     implementation deps.hilt.android
     kapt deps.hilt.compiler
+
+    implementation deps.navigation.fragment
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.ui
+    implementation deps.navigation.ui_ktx
 }
