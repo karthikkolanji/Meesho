@@ -59,4 +59,9 @@ dependencies {
 
     implementation deps.hilt.android
     kapt deps.hilt.compiler
+
+    implementation (deps.room.runtime)
+    kapt (deps.room.compiler)
+    implementation (deps.room.ktx)
+
 }
