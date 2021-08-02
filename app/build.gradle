@@ -63,7 +63,9 @@ dependencies {
     implementation deps.lifecycle.app
 
     implementation deps.hilt.android
+    implementation deps.hilt.work
     kapt deps.hilt.compiler
+    kapt deps.hilt.jetpack_compiler
 
     implementation deps.navigation.fragment
     implementation deps.navigation.fragment_ktx

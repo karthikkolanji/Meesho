@@ -73,7 +73,9 @@ dependencies {
     api deps.gson
 
     implementation deps.hilt.android
+    implementation deps.hilt.work
     kapt deps.hilt.compiler
+    kapt deps.hilt.jetpack_compiler
 
     api deps.kotlin.stdlib
 
@@ -88,5 +90,8 @@ dependencies {
     api deps.navigation.fragment_ktx
     api deps.navigation.ui
     api deps.navigation.ui_ktx
+
+    api deps.work.runtime
+    api deps.work.runtime_ktx
 
 }

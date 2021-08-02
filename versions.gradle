@@ -20,7 +20,8 @@ versions.okhttp_logging_interceptor = "4.9.1"
 versions.retrofit = "2.9.0"
 versions.timber = "4.7.1"
 versions.hilt = "2.35"
-versions.work = "2.4.0"
+versions.hilt_jetpack = "1.0.0"
+versions.work = "2.5.0"
 versions.gson = "2.8.7"
 versions.zxing_embeded = "4.1.0"
 versions.zxing= "3.3.0"
@@ -113,6 +114,8 @@ def hilt = [:]
 hilt.plugin = "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
 hilt.android = "com.google.dagger:hilt-android:$versions.hilt"
 hilt.compiler = "com.google.dagger:hilt-android-compiler:$versions.hilt"
+hilt.work = "androidx.hilt:hilt-work:$versions.hilt_jetpack"
+hilt.jetpack_compiler = "androidx.hilt:hilt-compiler:$versions.hilt_jetpack"
 deps.hilt = hilt
 
 
@@ -145,6 +148,13 @@ deps.timber = "com.jakewharton.timber:timber:$versions.timber"
 deps.transition = "androidx.transition:transition:$versions.transition"
 
 deps.apache_text = "org.apache.commons:commons-text:$versions.apache_text"
+
+
+def work = [:]
+work.runtime = "androidx.work:work-runtime:$versions.work"
+work.runtime_ktx = "androidx.work:work-runtime-ktx:$versions.work"
+deps.work = work
+
 
 def barcode_scanner = [:]
 barcode_scanner.zxing_embeded = "com.journeyapps:zxing-android-embedded:$versions.zxing_embeded"

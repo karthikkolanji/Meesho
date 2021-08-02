@@ -58,7 +58,9 @@ dependencies {
     implementation deps.barcode_scanner.zxing
 
     implementation deps.hilt.android
+    implementation deps.hilt.work
     kapt deps.hilt.compiler
+    kapt deps.hilt.jetpack_compiler
 
     implementation (deps.room.runtime)
     kapt (deps.room.compiler)
