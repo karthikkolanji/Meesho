@@ -16,10 +16,10 @@ class SaveQrScanResult @Inject constructor(
 
     suspend fun saveTime(scanResult: String) {
         repository.saveQrScanResult(parseScanResult.parse(scanResult))
-        updateTime()
+        startTimer()
     }
 
-    private suspend fun updateTime() {
+    private suspend fun startTimer() {
 
         val startTime = System.currentTimeMillis()
 
