@@ -9,5 +9,8 @@ import androidx.room.PrimaryKey
 data class QRScanResult(
     @PrimaryKey val location_id: String,
     val location_details: String? = null,
-    val price_per_min: Float = 0F
+    val price_per_min: Float = 0F,
+    val hour: Long = 0,
+    val minute: Long = 0,
+    val seconds: Long = 0,
 )
