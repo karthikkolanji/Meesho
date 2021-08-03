@@ -82,11 +82,36 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
             when (it) {
                 is State.Success<*> -> {
                     val session = it.data as QRScanResult
-                    val activeSession = session.session_status
-                    if (activeSession) {
-                        binding.tvLocationDetails.text =
-                            "h:${session.hour} m:${session.minute} s:${session.seconds}"
-                    }
+
+                        binding.apply {
+                            tvLocationId.text = String.format(
+                                getString(R.string.location_id),
+                                session.location_id
+                            )
+
+                            tvAddress.text = String.format(
+                                getString(R.string.address),
+                                session.location_details
+                            )
+
+                            tvPrice.text = String.format(
+                                getString(R.string.price),
+                                session.price_per_min
+                            )
+
+                            tvDuration.text = String.format(
+                                getString(R.string.duration),
+                                session.hour,
+                                session.minute,
+                                session.seconds,
+                            )
+
+                            tvTotalCharges.text = String.format(
+                                getString(R.string.total_charges),
+                                session.total_price
+                            )
+
+                        }
                 }
                 is State.ErrorState -> {
                     shortToast(it.exception.message)
