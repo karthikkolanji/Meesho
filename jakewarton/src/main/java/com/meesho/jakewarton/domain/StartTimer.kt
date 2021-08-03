@@ -2,7 +2,6 @@ package com.meesho.jakewarton.domain
 
 import android.util.Log
 import com.meesho.jakewarton.data.db.Repository
-import com.meesho.jakewarton.data.entity.Timer
 import com.meesho.jakewarton.utils.Utils
 import kotlinx.coroutines.delay
 import javax.inject.Inject
@@ -13,7 +12,7 @@ class StartTimer @Inject constructor(private val utils: Utils,
                                      private val repository: Repository,
 ) {
 
-    suspend fun start(): Timer {
+    suspend fun start() {
         val startTime = System.currentTimeMillis()
 
         while (true) {
