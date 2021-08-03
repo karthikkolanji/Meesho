@@ -1,5 +1,6 @@
 package com.meesho.jakewarton.utils
 
+import com.meesho.jakewarton.data.entity.Timer
 import org.apache.commons.text.StringEscapeUtils.unescapeJava
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -11,7 +12,7 @@ class Utils @Inject constructor() {
         return unescapeJava(unQuotedString)
     }
 
-    fun millisecondToStandard(millis: Long): String {
+    fun millisecondToStandard(millis: Long): Timer {
         val day = TimeUnit.MILLISECONDS.toDays(millis).toInt()
         val hours = TimeUnit.MILLISECONDS.toHours(millis) - day * 24
         val minute =
@@ -19,6 +20,7 @@ class Utils @Inject constructor() {
         val second =
             TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MILLISECONDS.toMinutes(millis) * 60
 
-        return ("Hour $hours Minute $minute Seconds $second")
+
+        return Timer(hour = hours, minute = minute, seconds = second)
     }
 }
