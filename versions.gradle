@@ -27,6 +27,7 @@ versions.zxing_embeded = "4.1.0"
 versions.zxing= "3.3.0"
 versions.room= "2.3.0"
 versions.apache_text= "1.6"
+versions.multidex= "2.0.1"
 ext.versions = versions
 
 def build_versions = [:]
@@ -132,23 +133,12 @@ deps.retrofit = retrofit
 
 deps.gson = "com.google.code.gson:gson:$versions.gson"
 
-
-
 def room = [:]
 room.runtime = "androidx.room:room-runtime:$versions.room"
 room.compiler = "androidx.room:room-compiler:$versions.room"
 room.ktx = "androidx.room:room-ktx:$versions.room"
 room.testing = "androidx.room:room-testing:$versions.room"
 deps.room = room
-
-
-
-deps.timber = "com.jakewharton.timber:timber:$versions.timber"
-
-deps.transition = "androidx.transition:transition:$versions.transition"
-
-deps.apache_text = "org.apache.commons:commons-text:$versions.apache_text"
-
 
 def work = [:]
 work.runtime = "androidx.work:work-runtime:$versions.work"
@@ -160,6 +150,19 @@ def barcode_scanner = [:]
 barcode_scanner.zxing_embeded = "com.journeyapps:zxing-android-embedded:$versions.zxing_embeded"
 barcode_scanner.zxing = "com.google.zxing:core:$versions.zxing"
 deps.barcode_scanner = barcode_scanner
+
+
+
+deps.timber = "com.jakewharton.timber:timber:$versions.timber"
+
+deps.transition = "androidx.transition:transition:$versions.transition"
+
+deps.apache_text = "org.apache.commons:commons-text:$versions.apache_text"
+
+deps.multidex = "androidx.multidex:multidex:$versions.multidex"
+
+
+
 
 
 
