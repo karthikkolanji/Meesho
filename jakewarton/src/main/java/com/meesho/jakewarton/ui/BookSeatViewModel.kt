@@ -7,6 +7,7 @@ import com.meesho.base.utils.State
 import com.meesho.jakewarton.data.entity.BookSeat
 import com.meesho.jakewarton.domain.GetElapsedTime
 import com.meesho.jakewarton.domain.GetSessionStatus
+import com.meesho.jakewarton.domain.SubmitSession
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
@@ -16,11 +17,16 @@ class BookSeatViewModel @Inject constructor(
     private val bookSeat: BookSeat,
     private val dispatcherProvider: DispatcherProvider,
     private val getElapsedTime: GetElapsedTime,
-    private val getSessionStatus: GetSessionStatus
+    private val getSessionStatus: GetSessionStatus,
+    private val submitSession: SubmitSession
 ) : ViewModel() {
 
     suspend fun bookSeat(scanResult: String) {
         bookSeat.bookSeat(scanResult)
+    }
+
+    suspend fun submit() {
+        submitSession.submit()
     }
 
     suspend fun getElapsedTime() = liveData {

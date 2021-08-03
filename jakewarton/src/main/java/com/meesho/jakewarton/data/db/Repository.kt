@@ -43,4 +43,14 @@ class Repository @Inject constructor(
             .distinctUntilChanged()
     }
 
+    suspend fun submitSession() {
+        val scanResult = withContext(dispatcherProvider.io()) {
+            dao.getQrResult()
+        }
+        val locationId = scanResult.location_id
+        withContext(dispatcherProvider.io()) {
+            dao.endSession(false, locationId)
+        }
+    }
+
 }
