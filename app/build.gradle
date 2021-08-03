@@ -12,7 +12,6 @@ android {
         applicationId "com.meesho.assignment"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        multiDexEnabled = true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
