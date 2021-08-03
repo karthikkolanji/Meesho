@@ -10,5 +10,5 @@
     <string name="qr_read_error">Error in reading QR code!</string>
     <string name="submission_success">Data submitted successfully</string>
     <string name="submission_error">Error occurred while submitting data</string>
-    <string name="loading">Please wait...</string>
+    <string name="loading">Submitting data. Please wait...</string>
 </resources>

@@ -38,13 +38,6 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
                 }
 
             }
-
-            btDeleteTable.setOnClickListener {
-                lifecycleScope.launch {
-                    viewModel.deleteTable()
-                }
-
-            }
         }
 
 
@@ -83,35 +76,35 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
                 is State.Success<*> -> {
                     val session = it.data as QRScanResult
 
-                        binding.apply {
-                            tvLocationId.text = String.format(
-                                getString(R.string.location_id),
-                                session.location_id
-                            )
+                    binding.apply {
+                        tvLocationId.text = String.format(
+                            getString(R.string.location_id),
+                            session.location_id
+                        )
 
-                            tvAddress.text = String.format(
-                                getString(R.string.address),
-                                session.location_details
-                            )
+                        tvAddress.text = String.format(
+                            getString(R.string.address),
+                            session.location_details
+                        )
 
-                            tvPrice.text = String.format(
-                                getString(R.string.price),
-                                session.price_per_min
-                            )
+                        tvPrice.text = String.format(
+                            getString(R.string.price),
+                            session.price_per_min
+                        )
 
-                            tvDuration.text = String.format(
-                                getString(R.string.duration),
-                                session.hour,
-                                session.minute,
-                                session.seconds,
-                            )
+                        tvDuration.text = String.format(
+                            getString(R.string.duration),
+                            session.hour,
+                            session.minute,
+                            session.seconds,
+                        )
 
-                            tvTotalCharges.text = String.format(
-                                getString(R.string.total_charges),
-                                session.total_price
-                            )
+                        tvTotalCharges.text = String.format(
+                            getString(R.string.total_charges),
+                            session.total_price
+                        )
 
-                        }
+                    }
                 }
                 is State.ErrorState -> {
                     shortToast(it.exception.message)
@@ -125,15 +118,18 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
             when (it) {
                 is State.LoadingState -> {
                     disableButton()
-                    shortToast(R.string.loading)
+                    showProgress()
                 }
 
                 is State.Success<*> -> {
                     enableButton()
+                    hideProgress()
                     shortToast(R.string.submission_success)
+
                 }
                 is State.ErrorState -> {
                     enableButton()
+                    hideProgress()
                     shortToast(R.string.submission_error)
                 }
             }
@@ -172,5 +168,13 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
             btScanNow.disable()
             btEndScan.disable()
         }
+    }
+
+    private fun showProgress() {
+        binding.groupLoading.visible()
+    }
+
+    private fun hideProgress() {
+        binding.groupLoading.gone()
     }
 }

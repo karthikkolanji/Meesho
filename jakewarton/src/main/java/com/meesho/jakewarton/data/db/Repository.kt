@@ -53,7 +53,7 @@ class Repository @Inject constructor(
             .flowOn(dispatcherProvider.io())
             .distinctUntilChanged()
     }
-
+    //todo : get only required filed
     suspend fun getSessionStatus(): Flow<Boolean> {
         return dao.getSessionStatus()
             .flowOn(dispatcherProvider.io())
@@ -69,6 +69,7 @@ class Repository @Inject constructor(
         }
     }
 
+    // todo: save totalTimeSpent in db
     suspend fun submitSession() {
         val session = withContext(dispatcherProvider.io()) {
             dao.getQrResult()
