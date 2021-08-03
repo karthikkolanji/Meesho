@@ -62,7 +62,7 @@ dependencies {
     kapt deps.hilt.compiler
     kapt deps.hilt.jetpack_compiler
 
-    implementation (deps.room.runtime)
+    api (deps.room.runtime)
     kapt (deps.room.compiler)
     implementation (deps.room.ktx)
 
