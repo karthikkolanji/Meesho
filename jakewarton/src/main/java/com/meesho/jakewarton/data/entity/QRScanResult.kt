@@ -14,4 +14,7 @@ data class QRScanResult(
     val minute: Long = 0,
     val seconds: Long = 0,
     val session_status: Boolean = false,
+    val start_time: Long = 0L,
+    val end_time: Long = 0L,
+    val total_price: Float = 0F
 )

@@ -8,10 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.zxing.integration.android.IntentIntegrator
-import com.meesho.base.extensions.gone
-import com.meesho.base.extensions.shortToast
-import com.meesho.base.extensions.viewLifecycleScoped
-import com.meesho.base.extensions.visible
+import com.meesho.base.extensions.*
 import com.meesho.base.utils.State
 import com.meesho.jakewarton.R
 import com.meesho.jakewarton.data.entity.QRScanResult
@@ -37,7 +34,14 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
 
             btEndScan.setOnClickListener {
                 lifecycleScope.launch {
-                    viewModel.submit()
+                    observeSubmitSession()
+                }
+
+            }
+
+            btDeleteTable.setOnClickListener {
+                lifecycleScope.launch {
+                    viewModel.deleteTable()
                 }
 
             }
@@ -45,44 +49,70 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
 
 
 
-        observerElapsedTime()
+        observerData()
 
     }
 
-    private fun observerElapsedTime() {
-
-        lifecycleScope.launch {
+    private fun observerData() {
+        lifecycleScope.launchWhenResumed {
             // updating elapsed time
-            viewModel.getElapsedTime().observe(viewLifecycleOwner, {
-                when (it) {
-                    is State.Success<*> -> {
-                        val time = it.data as QRScanResult
-                        binding.tvLocationDetails.text =
-                            "h:${time.hour} m:${time.minute} s:${time.seconds}"
-
-                    }
-                    is State.ErrorState -> {
-                        shortToast(it.exception.message)
-                    }
-                }
-            })
+            observeElapsedTime()
 
             // updating session status (btScanNow/btEndScan button visibility)
-            viewModel.getSessionStatus().observe(viewLifecycleOwner, { active ->
-                binding.apply {
-                    if (active) {
-                        btScanNow.gone()
-                        btEndScan.visible()
-                    } else {
-                        btScanNow.visible()
-                        btEndScan.gone()
-                    }
-
-                }
-            })
-
+            observeSessionStatus()
         }
+    }
 
+    private suspend fun observeSessionStatus() {
+        viewModel.getSessionStatus().observe(viewLifecycleOwner, { active ->
+            binding.apply {
+                if (active) {
+                    btScanNow.gone()
+                    btEndScan.visible()
+                } else {
+                    btScanNow.visible()
+                    btEndScan.gone()
+                }
+            }
+        })
+    }
+
+    private suspend fun observeElapsedTime() {
+        viewModel.getElapsedTime().observe(viewLifecycleOwner, {
+            when (it) {
+                is State.Success<*> -> {
+                    val session = it.data as QRScanResult
+                    val activeSession = session.session_status
+                    if (activeSession) {
+                        binding.tvLocationDetails.text =
+                            "h:${session.hour} m:${session.minute} s:${session.seconds}"
+                    }
+                }
+                is State.ErrorState -> {
+                    shortToast(it.exception.message)
+                }
+            }
+        })
+    }
+
+    private suspend fun observeSubmitSession() {
+        viewModel.submit().observe(viewLifecycleOwner, {
+            when (it) {
+                is State.LoadingState -> {
+                    disableButton()
+                    shortToast(R.string.loading)
+                }
+
+                is State.Success<*> -> {
+                    enableButton()
+                    shortToast(R.string.submission_success)
+                }
+                is State.ErrorState -> {
+                    enableButton()
+                    shortToast(R.string.submission_error)
+                }
+            }
+        })
     }
 
 
@@ -101,6 +131,21 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
                 Log.d("onActivityResult", "${result.contents}")
                 shortToast(result.contents)
             }
+        }
+    }
+
+    //####################   UI ##############################//
+    private fun enableButton() {
+        binding.apply {
+            btScanNow.enable()
+            btEndScan.enable()
+        }
+    }
+
+    private fun disableButton() {
+        binding.apply {
+            btScanNow.disable()
+            btEndScan.disable()
         }
     }
 }

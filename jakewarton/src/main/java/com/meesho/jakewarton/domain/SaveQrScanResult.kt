@@ -12,7 +12,7 @@ class SaveQrScanResult @Inject constructor(
 ) {
 
     suspend fun saveTime(scanResult: String) {
-        repository.saveQrScanResult(parseScanResult.parse(scanResult))
+        repository.saveQrScanResult(scanResult = parseScanResult.parse(scanResult),startTime = System.currentTimeMillis())
         startTimer.start()
     }
 }

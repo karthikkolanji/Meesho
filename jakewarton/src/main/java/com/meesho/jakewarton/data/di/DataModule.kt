@@ -5,11 +5,13 @@ import androidx.room.Room
 import androidx.work.WorkManager
 import com.meesho.jakewarton.data.db.BookSeatDao
 import com.meesho.jakewarton.data.db.BookSeatDatabase
+import com.meesho.jakewarton.data.remote.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module
@@ -35,6 +37,12 @@ class DataModule {
     @Singleton
     fun provideWorker( @ApplicationContext context: Context): WorkManager {
        return WorkManager.getInstance(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 
     companion object{

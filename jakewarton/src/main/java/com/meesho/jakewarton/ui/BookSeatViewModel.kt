@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.meesho.base.di.DispatcherProvider
 import com.meesho.base.utils.State
+import com.meesho.jakewarton.data.db.Repository
 import com.meesho.jakewarton.data.entity.BookSeat
 import com.meesho.jakewarton.domain.GetElapsedTime
 import com.meesho.jakewarton.domain.GetSessionStatus
@@ -18,15 +19,26 @@ class BookSeatViewModel @Inject constructor(
     private val dispatcherProvider: DispatcherProvider,
     private val getElapsedTime: GetElapsedTime,
     private val getSessionStatus: GetSessionStatus,
-    private val submitSession: SubmitSession
+    private val submitSession: SubmitSession,
+    private val repository: Repository
 ) : ViewModel() {
+
+    suspend fun deleteTable(){
+        repository.deleteSession()
+    }
 
     suspend fun bookSeat(scanResult: String) {
         bookSeat.bookSeat(scanResult)
     }
 
-    suspend fun submit() {
-        submitSession.submit()
+    suspend fun submit() = liveData {
+        emit(State.LoadingState)
+        try {
+            emit(State.Success(submitSession.submit()))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emit(e)
+        }
     }
 
     suspend fun getElapsedTime() = liveData {
