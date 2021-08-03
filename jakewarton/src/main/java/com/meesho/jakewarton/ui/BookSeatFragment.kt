@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.zxing.integration.android.IntentIntegrator
+import com.meesho.base.extensions.gone
 import com.meesho.base.extensions.shortToast
 import com.meesho.base.extensions.viewLifecycleScoped
+import com.meesho.base.extensions.visible
 import com.meesho.base.utils.State
 import com.meesho.jakewarton.R
 import com.meesho.jakewarton.data.entity.QRScanResult
@@ -25,12 +27,9 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btBookSeat.setOnClickListener {
+        binding.btScanNow.setOnClickListener {
             lifecycleScope.launch {
                 viewModel.bookSeat("\"{\\\"location_id\\\":\\\"ButterKnifeLib-1234\\\",\\\"location_details\\\":\\\"ButterKnife Lib, 80 Feet Rd, Koramangala 1A Block, Bangalore\\\",\\\"price_per_min\\\":5.50}\"")
-//               delay(2000)
-//                observerElapsedTime()
-                //viewModel.startTimer()
             }
             //IntentIntegrator.forSupportFragment(this).initiateScan()
         }
@@ -41,28 +40,35 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
     private fun observerElapsedTime() {
 
         lifecycleScope.launch {
+            // updating elapsed time
             viewModel.getElapsedTime().observe(viewLifecycleOwner, {
-
                 when (it) {
-                    is State.LoadingState -> {
-                       // nothing
-                    }
                     is State.Success<*> -> {
-                       it.data?.let {result->
-                           val time=result as QRScanResult
-                           binding.tvLocationDetails.text = "h:${time.hour} m:${time.minute} s:${time.seconds}"
-                        }
-
+                        val time = it.data as QRScanResult
+                        binding.tvLocationDetails.text =
+                            "h:${time.hour} m:${time.minute} s:${time.seconds}"
 
                     }
                     is State.ErrorState -> {
                         shortToast(it.exception.message)
                     }
                 }
-                it?.let {
+            })
+
+            // updating session status (btScanNow/btEndScan button visibility)
+            viewModel.getSessionStatus().observe(viewLifecycleOwner, { active ->
+                binding.apply {
+                    if (active) {
+                        btScanNow.gone()
+                        btEndScan.visible()
+                    } else {
+                        btScanNow.visible()
+                        btEndScan.gone()
+                    }
 
                 }
             })
+
         }
 
     }

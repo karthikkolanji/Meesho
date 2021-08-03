@@ -17,21 +17,28 @@ class Repository @Inject constructor(
 ) {
 
     suspend fun saveQrScanResult(scanResult: QRScanResult) {
-        dao.insert(scanResult)
+        val activeSession = scanResult.copy(session_status = true)
+        dao.insert(activeSession)
     }
 
     suspend fun updateTime(timer: Timer) {
-        val scanResult = withContext(dispatcherProvider.io()){
+        val scanResult = withContext(dispatcherProvider.io()) {
             dao.getQrResult()
         }
         val locationId = scanResult.location_id
-        withContext(dispatcherProvider.io()){
+        withContext(dispatcherProvider.io()) {
             dao.updateTime(timer.hour, timer.minute, timer.seconds, locationId)
         }
     }
 
-    suspend fun getElapsedTime(): Flow<QRScanResult?> {
+    suspend fun getElapsedTime(): Flow<QRScanResult> {
         return dao.getElapsedTime()
+            .flowOn(dispatcherProvider.io())
+            .distinctUntilChanged()
+    }
+
+    suspend fun getSessionStatus(): Flow<Boolean> {
+        return dao.getSessionStatus()
             .flowOn(dispatcherProvider.io())
             .distinctUntilChanged()
     }

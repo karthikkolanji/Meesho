@@ -18,6 +18,9 @@ interface BookSeatDao {
     suspend fun updateTime(hour: Long, minute: Long, seconds: Long, id: String)
 
     @Query("SELECT * FROM QRScanResult")
-    fun getElapsedTime(): Flow<QRScanResult?>
+    fun getElapsedTime(): Flow<QRScanResult>
+
+    @Query("SELECT session_status FROM QRScanResult")
+    fun getSessionStatus(): Flow<Boolean>
 
 }
