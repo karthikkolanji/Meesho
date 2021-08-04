@@ -3,6 +3,7 @@ package com.meesho.jakewarton.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.meesho.base.di.DispatcherProvider
+import com.meesho.base.utils.ApiError
 import com.meesho.base.utils.State
 import com.meesho.jakewarton.data.db.Repository
 import com.meesho.jakewarton.domain.BookSeat
@@ -23,21 +24,17 @@ class BookSeatViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    suspend fun deleteTable(){
-        repository.deleteSession()
-    }
-
     suspend fun bookSeat(scanResult: String) {
         bookSeat.bookSeat(scanResult)
     }
 
-    suspend fun submit() = liveData {
+    suspend fun submit(qrScanResult: String) = liveData {
         emit(State.LoadingState)
         try {
-            emit(State.Success(submitSession.submit()))
+            emit(State.Success(submitSession.submit(qrScanResult)))
         } catch (e: Exception) {
             e.printStackTrace()
-            emit(e)
+            emit(ApiError.resolveError(e))
         }
     }
 
@@ -49,7 +46,7 @@ class BookSeatViewModel @Inject constructor(
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            emit(e)
+            emit(ApiError.resolveError(e))
         }
     }
 

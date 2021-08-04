@@ -2,6 +2,7 @@ package com.meesho.jakewarton.domain
 
 import androidx.work.WorkManager
 import com.meesho.jakewarton.data.db.Repository
+import com.meesho.jakewarton.utils.ScanError
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
@@ -10,10 +11,20 @@ class SubmitSession @Inject constructor(
     private val repository: Repository,
     private val calculatePrice: CalculatePrice,
     private val sessionTimer: SessionTimer,
-    private val workManager: WorkManager
+    private val workManager: WorkManager,
+    private val validateEndQrScan: ValidateEndQrScan
 ) {
 
-    suspend fun submit() {
+    suspend fun submit(endQrrScanResult: String) {
+
+        if (validateEndQrScan.isValid(endQrrScanResult)) {
+            endSession()
+        } else {
+            throw ScanError()
+        }
+    }
+
+    private suspend fun endSession() {
         // first stops the timer
         sessionTimer.stopTimer()
 
