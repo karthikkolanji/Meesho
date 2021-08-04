@@ -1,6 +1,5 @@
 package com.meesho.jakewarton.domain
 
-import androidx.work.WorkManager
 import com.meesho.jakewarton.data.db.Repository
 import com.meesho.jakewarton.utils.ScanError
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -11,7 +10,7 @@ class SubmitSession @Inject constructor(
     private val repository: Repository,
     private val calculatePrice: CalculatePrice,
     private val sessionTimer: SessionTimer,
-    private val workManager: WorkManager,
+    private val bookSeat: BookSeat,
     private val validateEndQrScan: ValidateEndQrScan
 ) {
 
@@ -29,7 +28,7 @@ class SubmitSession @Inject constructor(
         sessionTimer.stopTimer()
 
         // stop the worker
-        workManager.cancelUniqueWork(BookSeat.TIMER_WORK)
+        bookSeat.cancel()
 
         // ends the session by updating values in db
         repository.endSession(System.currentTimeMillis())
