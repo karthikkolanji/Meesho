@@ -22,17 +22,14 @@ class ShowNotification @Inject constructor(private val workManager: WorkManager)
             .build()
             .enableWorkerLogging()
 
-        if (workManager!=null){
-            workManager
-                .beginUniqueWork(NOTIFICATION_WORK, ExistingWorkPolicy.REPLACE, workRequest)
-                .enqueue()
-        }
+        workManager
+            .beginUniqueWork(NOTIFICATION_WORK, ExistingWorkPolicy.REPLACE, workRequest)
+            .enqueue()
+
     }
 
     fun cancel() {
-        if (workManager!=null){
-            workManager.cancelUniqueWork(NOTIFICATION_WORK)
-        }
+        workManager.cancelUniqueWork(NOTIFICATION_WORK)
     }
 
     companion object {

@@ -2,9 +2,7 @@ package com.meesho.jakewarton.data.background
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.hilt.work.HiltWorker
@@ -13,17 +11,17 @@ import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import com.meesho.jakewarton.R
 import com.meesho.jakewarton.domain.GetElapsedTime
+import com.meesho.jakewarton.domain.GetSession
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.collect
-
-
 
 
 @HiltWorker
 class NotificationWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted workerParams: WorkerParameters,
+    private val getSession: GetSession,
     private val getElapsedTime: GetElapsedTime,
 ) : CoroutineWorker(context, workerParams) {
 
@@ -34,22 +32,26 @@ class NotificationWorker @AssistedInject constructor(
         notificationManager =
             applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
-    override suspend fun doWork(): Result {
-        setForeground(createForegroundInfo())
-        getElapsedTime.get().collect {
-            val duration = "Session is Active  Hour:${it.hour} Minute:${it.minute} Seconds:${it.seconds}"
-            showProgress(duration,notificationManager)
 
+    override suspend fun doWork(): Result {
+        if (getSession.get().session_status) {
+            setForeground(createForegroundInfo())
+            getElapsedTime.get().collect {
+                val duration =
+                    "Session is Active  Hour:${it.hour} Minute:${it.minute} Seconds:${it.seconds}"
+                showProgress(duration, notificationManager)
+
+            }
         }
         return Result.success()
     }
 
     private fun createForegroundInfo(): ForegroundInfo {
 
-        val contentIntent = PendingIntent.getActivity(
-            applicationContext,
-            0, Intent(applicationContext, MainActivity::class.java), 0
-        )
+//        val contentIntent = PendingIntent.getActivity(
+//            applicationContext,
+//            0, Intent(applicationContext, MainActivity::class.java), 0
+//        )
         createNotificationChannel(notificationManager)
 
         notificationBuilder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
@@ -66,7 +68,7 @@ class NotificationWorker @AssistedInject constructor(
         notificationManager: NotificationManager?
     ) {
         val notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(CHANNEL_NAME)
             .setOnlyAlertOnce(true)
             .setPriority(NotificationCompat.PRIORITY_MAX)
@@ -92,7 +94,7 @@ class NotificationWorker @AssistedInject constructor(
 
 
     companion object {
-        const val CHANNEL_NAME = "Session"
+        const val CHANNEL_NAME = "Meesho Session"
         const val CHANNEL_ID = "Library Seat Booking"
         const val NOTIFICATION_ID = 1
         const val SESSION_NOTIFICATION = "Session Notification"
