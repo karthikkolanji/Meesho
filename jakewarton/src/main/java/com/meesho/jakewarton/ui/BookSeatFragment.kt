@@ -21,13 +21,14 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
 
     private val binding: FragmentBookSeatBinding by viewLifecycleScoped(FragmentBookSeatBinding::bind)
     private val viewModel: BookSeatViewModel by viewModels()
+    private val testQr="\"{\\\"location_id\\\":\\\"ButterKnifeLib-1234\\\",\\\"location_details\\\":\\\"ButterKnife Lib, 80 Feet Rd, Koramangala 1A Block, Bangalore\\\",\\\"price_per_min\\\":5.50}\""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             btScanNow.setOnClickListener {
                 lifecycleScope.launch {
-                    viewModel.bookSeat("\"{\\\"location_id\\\":\\\"ButterKnifeLib-1234\\\",\\\"location_details\\\":\\\"ButterKnife Lib, 80 Feet Rd, Koramangala 1A Block, Bangalore\\\",\\\"price_per_min\\\":5.50}\"")
+                    viewModel.bookSeat(testQr)
                 }
                 //IntentIntegrator.forSupportFragment(this).initiateScan()
             }
@@ -114,7 +115,7 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
     }
 
     private suspend fun observeSubmitSession() {
-        viewModel.submit().observe(viewLifecycleOwner, {
+        viewModel.submit(testQr).observe(viewLifecycleOwner, {
             when (it) {
                 is State.LoadingState -> {
                     disableButton()
