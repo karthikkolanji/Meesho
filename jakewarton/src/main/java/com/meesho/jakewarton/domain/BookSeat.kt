@@ -28,6 +28,10 @@ class BookSeat @Inject constructor(private val workManager: WorkManager) {
             .enqueue()
     }
 
+    suspend fun cancel(){
+        workManager.cancelUniqueWork(TIMER_WORK)
+    }
+
     companion object {
         const val SCAN_RESULT = "scan_result"
         const val TIMER_WORK="timer_work"
