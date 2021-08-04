@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.meesho.jakewarton.data.entity.BookSeat
+import com.meesho.jakewarton.domain.BookSeat
 import com.meesho.jakewarton.domain.SaveQrScanResult
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject

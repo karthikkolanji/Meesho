@@ -1,6 +1,7 @@
-package com.meesho.jakewarton.data.entity
+package com.meesho.jakewarton.domain
 
 import androidx.work.Data
+import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.meesho.jakewarton.data.background.BookSeatWorker
@@ -11,15 +12,16 @@ import javax.inject.Inject
 class BookSeat @Inject constructor(private val workManager: WorkManager) {
 
     suspend fun bookSeat(scanResult: String) {
-        val worker = OneTimeWorkRequest.Builder(BookSeatWorker::class.java)
+        val workerRequest = OneTimeWorkRequest.Builder(BookSeatWorker::class.java)
         val data = Data.Builder()
         data.putString(SCAN_RESULT, scanResult)
-        worker.setInputData(data.build())
-        workManager.enqueue(worker.build())
+        workerRequest.setInputData(data.build())
+        workManager.enqueueUniqueWork(TIMER_WORK,ExistingWorkPolicy.REPLACE,workerRequest.build())
     }
 
     companion object {
         const val SCAN_RESULT = "scan_result"
+        const val TIMER_WORK="timer_work"
     }
 
 }

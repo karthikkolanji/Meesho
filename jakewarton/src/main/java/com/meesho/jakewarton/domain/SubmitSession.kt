@@ -1,5 +1,6 @@
 package com.meesho.jakewarton.domain
 
+import androidx.work.WorkManager
 import com.meesho.jakewarton.data.db.Repository
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
@@ -8,12 +9,16 @@ import javax.inject.Inject
 class SubmitSession @Inject constructor(
     private val repository: Repository,
     private val calculatePrice: CalculatePrice,
-    private val startTimer: StartTimer
+    private val sessionTimer: SessionTimer,
+    private val workManager: WorkManager
 ) {
 
     suspend fun submit() {
         // first stops the timer
-        startTimer.stopTimer()
+        sessionTimer.stopTimer()
+
+        // stop the worker
+        workManager.cancelUniqueWork(BookSeat.TIMER_WORK)
 
         // ends the session by updating values in db
         repository.endSession(System.currentTimeMillis())

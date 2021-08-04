@@ -5,7 +5,7 @@ import androidx.lifecycle.liveData
 import com.meesho.base.di.DispatcherProvider
 import com.meesho.base.utils.State
 import com.meesho.jakewarton.data.db.Repository
-import com.meesho.jakewarton.data.entity.BookSeat
+import com.meesho.jakewarton.domain.BookSeat
 import com.meesho.jakewarton.domain.GetElapsedTime
 import com.meesho.jakewarton.domain.GetSessionStatus
 import com.meesho.jakewarton.domain.SubmitSession

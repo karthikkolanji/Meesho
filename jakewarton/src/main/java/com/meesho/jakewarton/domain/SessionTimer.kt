@@ -10,7 +10,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class StartTimer @Inject constructor(
+class SessionTimer @Inject constructor(
     private val utils: Utils,
     private val repository: Repository,
 ) {

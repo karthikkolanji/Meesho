@@ -8,11 +8,11 @@ import javax.inject.Singleton
 class SaveQrScanResult @Inject constructor(
     private val repository: Repository,
     private val parseScanResult: ParseScanResult,
-    private val startTimer: StartTimer
+    private val sessionTimer: SessionTimer
 ) {
 
     suspend fun saveTime(scanResult: String) {
         repository.saveQrScanResult(scanResult = parseScanResult.parse(scanResult),startTime = System.currentTimeMillis())
-        startTimer.start()
+        sessionTimer.start()
     }
 }

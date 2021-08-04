@@ -117,6 +117,7 @@
 
    <androidx.constraintlayout.widget.Group
        android:id="@+id/groupLoading"
+       android:visibility="gone"
        app:constraint_referenced_ids="progress,tvLoading"
        android:layout_width="0dp"
        android:layout_height="0dp"/>
