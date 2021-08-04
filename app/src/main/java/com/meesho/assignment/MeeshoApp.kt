@@ -6,7 +6,9 @@ import androidx.hilt.work.HiltWorkerFactory
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.multidex.MultiDex
 import androidx.work.Configuration
+import com.meesho.base.extensions.debug
 import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltAndroidApp
@@ -25,11 +27,14 @@ class MeeshoApp : Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
+        debug {
+            Timber.plant(Timber.DebugTree())
+        }
         ProcessLifecycleOwner.get().lifecycle.addObserver(appLifeCycleObserver)
     }
 
     override fun getWorkManagerConfiguration(): Configuration {
-      return  Configuration.Builder()
+        return Configuration.Builder()
             .setWorkerFactory(workerFactory)
             .build()
     }

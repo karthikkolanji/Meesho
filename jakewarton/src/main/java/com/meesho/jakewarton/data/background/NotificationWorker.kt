@@ -5,12 +5,12 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
+import com.meesho.base.extensions.oreo
 import com.meesho.jakewarton.R
 import com.meesho.jakewarton.domain.GetElapsedTime
 import com.meesho.jakewarton.domain.GetSession
@@ -80,7 +80,7 @@ class NotificationWorker @AssistedInject constructor(
     }
 
     private fun createNotificationChannel(notificationManager: NotificationManager?) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        oreo {
             var notificationChannel =
                 notificationManager?.getNotificationChannel(CHANNEL_ID)
             if (notificationChannel == null) {
