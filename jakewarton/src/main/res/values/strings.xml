@@ -1,7 +1,7 @@
 <resources>
     <string name="scan_now">Scan Now</string>
     <string name="end_scan">End</string>
-    <string name="location_details">Location Details</string>
+    <string name="location_details">Please scan QR code to see details :</string>
     <string name="address">Address : %1$s</string>
     <string name="location_id">Location Id : %1$s</string>
     <string name="price">Price : %1$s</string>

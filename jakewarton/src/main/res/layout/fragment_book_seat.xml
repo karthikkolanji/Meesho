@@ -24,8 +24,7 @@
        android:textSize="@dimen/tv_medium"
        android:layout_marginTop="4dp"
        app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@+id/tvLocationDetails"
-       android:text="@string/location_id" />
+       app:layout_constraintTop_toBottomOf="@+id/tvLocationDetails" />
 
    <TextView
        android:id="@+id/tvAddress"
@@ -35,8 +34,7 @@
        android:textSize="@dimen/tv_medium"
        android:layout_marginTop="4dp"
        app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@+id/tvLocationId"
-       android:text="@string/address" />
+       app:layout_constraintTop_toBottomOf="@+id/tvLocationId" />
 
 
    <TextView
@@ -47,8 +45,7 @@
        android:textSize="@dimen/tv_medium"
        android:layout_marginTop="4dp"
        app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@+id/tvAddress"
-       android:text="@string/price" />
+       app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
 
    <TextView
        android:id="@+id/tvDuration"
@@ -58,8 +55,7 @@
        android:textSize="@dimen/tv_medium"
        android:layout_marginTop="4dp"
        app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@+id/tvPrice"
-       android:text="@string/duration" />
+       app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
 
 
    <TextView
@@ -70,8 +66,7 @@
        android:textSize="@dimen/tv_medium"
        android:layout_marginTop="4dp"
        app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@+id/tvDuration"
-       android:text="@string/total_charges" />
+       app:layout_constraintTop_toBottomOf="@+id/tvDuration"/>
 
 
    <ProgressBar
