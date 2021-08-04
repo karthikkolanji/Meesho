@@ -50,15 +50,11 @@ class NotificationWorker @AssistedInject constructor(
     }
 
     private fun createForegroundInfo(): ForegroundInfo {
-
         createNotificationChannel(notificationManager)
-
         notificationBuilder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setContentTitle(CHANNEL_NAME)
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setOngoing(true)
-
-
         return ForegroundInfo(NOTIFICATION_ID, notificationBuilder!!.build())
     }
 
