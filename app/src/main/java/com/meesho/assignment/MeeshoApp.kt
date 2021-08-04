@@ -13,10 +13,10 @@ import javax.inject.Inject
 class MeeshoApp : Application(), Configuration.Provider {
 
     @Inject
-    lateinit var appLifeCycleObserver: AppLifeCycleObserver
+    lateinit var workerFactory: HiltWorkerFactory
 
     @Inject
-    lateinit var workerFactory: HiltWorkerFactory
+    lateinit var appLifeCycleObserver: AppLifeCycleObserver
 
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
