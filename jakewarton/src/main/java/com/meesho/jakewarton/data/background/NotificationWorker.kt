@@ -2,7 +2,9 @@ package com.meesho.jakewarton.data.background
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.hilt.work.HiltWorker
@@ -37,9 +39,10 @@ class NotificationWorker @AssistedInject constructor(
         if (getSession.get().session_status) {
             setForeground(createForegroundInfo())
             getElapsedTime.get().collect {
-                val duration =
-                    "Session is Active  Hour:${it.hour} Minute:${it.minute} Seconds:${it.seconds}"
-                showProgress(duration, notificationManager)
+                showProgress(
+                    getSessionText(it.hour, it.minute, it.seconds),
+                    notificationManager
+                )
 
             }
         }
@@ -48,10 +51,6 @@ class NotificationWorker @AssistedInject constructor(
 
     private fun createForegroundInfo(): ForegroundInfo {
 
-//        val contentIntent = PendingIntent.getActivity(
-//            applicationContext,
-//            0, Intent(applicationContext, MainActivity::class.java), 0
-//        )
         createNotificationChannel(notificationManager)
 
         notificationBuilder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
@@ -67,6 +66,10 @@ class NotificationWorker @AssistedInject constructor(
         session: String,
         notificationManager: NotificationManager?
     ) {
+        val contentIntent = PendingIntent.getActivity(
+            applicationContext,
+            0, Intent(applicationContext, Class.forName(MAIN_ACTIVITY)), 0
+        )
         val notification = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(CHANNEL_NAME)
@@ -75,6 +78,7 @@ class NotificationWorker @AssistedInject constructor(
             .setOngoing(true)
             .setStyle(NotificationCompat.BigTextStyle())
             .setContentText(session)
+            .setContentIntent(contentIntent)
             .build()
         notificationManager?.notify(NOTIFICATION_ID, notification)
     }
@@ -92,11 +96,16 @@ class NotificationWorker @AssistedInject constructor(
         }
     }
 
+    private fun getSessionText(hour: Long = 0L, minute: Long = 0L, seconds: Long = 0L): String {
+        return "Active  Hour:${hour} Minute:${minute} Seconds:${seconds}"
+    }
+
 
     companion object {
         const val CHANNEL_NAME = "Meesho Session"
         const val CHANNEL_ID = "Library Seat Booking"
         const val NOTIFICATION_ID = 1
         const val SESSION_NOTIFICATION = "Session Notification"
+        const val MAIN_ACTIVITY = "com.meesho.assignment.ui.MainActivity"
     }
 }
