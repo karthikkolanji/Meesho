@@ -17,7 +17,7 @@ class CalculatePriceTest {
 
     @Before
     fun setUp() {
-        MockKAnnotations.init(this)
+        MockKAnnotations.init(this,relaxed = true)
     }
 
 
@@ -45,7 +45,10 @@ class CalculatePriceTest {
         val amount = session.price_per_min * duration
         Truth.assertThat(amount).isEqualTo(expectedAmount)
 
+        repository.updateAmount(amount)
+
         coVerify(exactly = 1) { repository.getSession() }
+        coVerify(exactly = 1) { repository.updateAmount(amount) }
     }
 
 
