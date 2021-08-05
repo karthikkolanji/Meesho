@@ -6,16 +6,10 @@ import android.net.NetworkCapabilities
 import com.meesho.base.extensions.lessThanMarshMellow
 import com.meesho.base.extensions.marshMellow
 import com.meesho.jakewarton.data.entity.Timer
-import org.apache.commons.text.StringEscapeUtils.unescapeJava
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class Utils @Inject constructor(private val context: Context) {
-
-    fun formatBarcodeResult(unformattedJson: String): String {
-        val unQuotedString = unformattedJson.replace("^\"|\"$".toRegex(), "")
-        return unescapeJava(unQuotedString)
-    }
 
     fun millisecondToStandard(millis: Long): Timer {
         val day = TimeUnit.MILLISECONDS.toDays(millis).toInt()
