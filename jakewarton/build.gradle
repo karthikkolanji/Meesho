@@ -68,4 +68,14 @@ dependencies {
 
     implementation deps.apache_text
 
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.ext_junit
+    testImplementation deps.test.arch_core
+    testImplementation deps.test.coroutines
+    testImplementation deps.test.mockk
+    testImplementation deps.test.mock_webserver
+    androidTestImplementation deps.test.espresso
+    androidTestImplementation deps.test.mockk_android
+    testImplementation deps.test.truth
+
 }
