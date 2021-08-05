@@ -41,8 +41,6 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
             }
         }
 
-
-
         observerData()
 
     }
@@ -108,7 +106,7 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
                     }
                 }
                 is State.ErrorState -> {
-                    shortToast(it.exception.message)
+                    longToast(it.exception.message)
                 }
             }
         })
@@ -131,7 +129,7 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
                 is State.ErrorState -> {
                     enableButton()
                     hideProgress()
-                    shortToast(R.string.submission_error)
+                    longToast(it.exception.message)
                 }
             }
         })

@@ -15,6 +15,18 @@ inline fun oreo(block: () -> Unit) {
     }
 }
 
+inline fun marshMellow(block: () -> Unit) {
+    if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {
+        block()
+    }
+}
+
+inline fun lessThanMarshMellow(block: () -> Unit) {
+    if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) {
+        block()
+    }
+}
+
 inline fun debug(block: () -> Unit) {
     if (BuildConfig.DEBUG) {
         block()

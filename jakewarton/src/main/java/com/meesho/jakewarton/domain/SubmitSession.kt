@@ -1,7 +1,9 @@
 package com.meesho.jakewarton.domain
 
+import com.meesho.base.utils.NetworkError
 import com.meesho.jakewarton.data.db.Repository
 import com.meesho.jakewarton.utils.ScanError
+import com.meesho.jakewarton.utils.Utils
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
@@ -11,15 +13,20 @@ class SubmitSession @Inject constructor(
     private val calculatePrice: CalculatePrice,
     private val sessionTimer: SessionTimer,
     private val bookSeat: BookSeat,
-    private val validateEndQrScan: ValidateEndQrScan
+    private val validateEndQrScan: ValidateEndQrScan,
+    private val utils: Utils
 ) {
 
     suspend fun submit(endQrrScanResult: String) {
-
-        if (validateEndQrScan.isValid(endQrrScanResult)) {
-            endSession()
-        } else {
-            throw ScanError()
+        if (utils.isNetworkConnected()){
+            if (validateEndQrScan.isValid(endQrrScanResult)) {
+                endSession()
+            } else {
+                throw ScanError()
+            }
+        }
+        else{
+            throw NetworkError()
         }
     }
 

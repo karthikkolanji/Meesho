@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name">Meesho</string>
     <string name="scan_now">Scan Now</string>
     <string name="end_scan">End</string>
     <string name="location_details">Please scan QR code to see details :</string>
@@ -10,5 +11,5 @@
     <string name="qr_read_error">Error in reading QR code!</string>
     <string name="submission_success">Data submitted successfully</string>
     <string name="submission_error">Error occurred while submitting data</string>
-    <string name="loading">Submitting data. Please wait...</string>
+    <string name="loading">Submitting data. Please wait…</string>
 </resources>

@@ -34,13 +34,12 @@ android {
 
         prodFlavour {
             dimension 'flavor'
-            applicationId "com.meesho.assignment"
-            resValue "string", "app_name", "Meesho"
+            applicationIdSuffix ".prod"
+
         }
         stagFlavour {
             dimension 'flavor'
-            applicationId "com.meesho.assignment.stag"
-            resValue "string", "app_name", "MeeshoDebug"
+            applicationIdSuffix ".stag"
         }
     }
     compileOptions {
