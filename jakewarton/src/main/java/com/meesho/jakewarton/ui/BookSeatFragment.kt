@@ -40,9 +40,7 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
 
             }
         }
-
         observerData()
-
     }
 
     private fun observerData() {
@@ -113,7 +111,7 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
     }
 
     private suspend fun observeSubmitSession() {
-        viewModel.submit(testQr).observe(viewLifecycleOwner, {
+        viewModel.submit(testQr,System.currentTimeMillis()).observe(viewLifecycleOwner, {
             when (it) {
                 is State.LoadingState -> {
                     disableButton()

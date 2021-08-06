@@ -28,10 +28,10 @@ class BookSeatViewModel @Inject constructor(
         bookSeat.bookSeat(scanResult)
     }
 
-    suspend fun submit(qrScanResult: String) = liveData {
+    suspend fun submit(qrScanResult: String,endTime:Long) = liveData {
         emit(State.LoadingState)
         try {
-            emit(State.Success(submitSession.submit(qrScanResult)))
+            emit(State.Success(submitSession.submit(qrScanResult,endTime)))
         } catch (e: Exception) {
             e.printStackTrace()
             emit(ApiError.resolveError(e))

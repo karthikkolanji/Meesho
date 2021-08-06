@@ -17,10 +17,10 @@ class SubmitSession @Inject constructor(
     private val utils: Utils
 ) {
 
-    suspend fun submit(endQrrScanResult: String) {
+    suspend fun submit(endQrrScanResult: String,endTime:Long) {
         if (utils.isNetworkConnected()){
             if (validateEndQrScan.isValid(endQrrScanResult)) {
-                endSession()
+                endSession(endTime)
             } else {
                 throw ScanError()
             }
@@ -30,7 +30,7 @@ class SubmitSession @Inject constructor(
         }
     }
 
-    private suspend fun endSession() {
+    private suspend fun endSession(endTime:Long) {
         // first stops the timer
         sessionTimer.stopTimer()
 
@@ -38,7 +38,7 @@ class SubmitSession @Inject constructor(
         bookSeat.cancel()
 
         // ends the session by updating values in db
-        repository.endSession(System.currentTimeMillis())
+        repository.endSession(endTime)
 
         // calculates the total amount and updates to db
         calculatePrice.calculate()
