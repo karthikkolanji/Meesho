@@ -22,7 +22,7 @@ class ValidateEndQrScanTest {
 
     @Before
     fun setUp() {
-        MockKAnnotations.init(this, relaxed = true)
+        MockKAnnotations.init(this)
     }
 
     @Test
