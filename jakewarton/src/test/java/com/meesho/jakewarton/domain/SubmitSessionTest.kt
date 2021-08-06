@@ -62,14 +62,6 @@ class SubmitSessionTest {
 
         usecase.submit(givenScanEndRawData,givenStartTime)
 
-//        utils.isNetworkConnected()
-//        validateEndQrScan.isValid(givenScanStartRawData)
-//        sessionTimer.stopTimer()
-//        bookSeat.cancel()
-//        repository.endSession(givenStartTime)
-//        calculatePrice.calculate()
-//        repository.submitSession()
-
         coVerify(exactly = 1) { utils.isNetworkConnected() }
         coVerify(exactly = 1) { validateEndQrScan.isValid(givenScanEndRawData) }
         coVerify(exactly = 1) { sessionTimer.stopTimer() }
