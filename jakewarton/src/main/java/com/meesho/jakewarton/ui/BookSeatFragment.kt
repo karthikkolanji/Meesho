@@ -2,7 +2,6 @@ package com.meesho.jakewarton.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,26 +20,29 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
 
     private val binding: FragmentBookSeatBinding by viewLifecycleScoped(FragmentBookSeatBinding::bind)
     private val viewModel: BookSeatViewModel by viewModels()
-    private val testQr="\"{\\\"location_id\\\":\\\"ButterKnifeLib-1234\\\",\\\"location_details\\\":\\\"ButterKnife Lib, 80 Feet Rd, Koramangala 1A Block, Bangalore\\\",\\\"price_per_min\\\":5.50}\""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setClickListener()
+        observerData()
+    }
+
+    private fun setClickListener() {
         binding.apply {
             btScanNow.setOnClickListener {
-                lifecycleScope.launch {
-                    viewModel.bookSeat(testQr)
-                }
-                //IntentIntegrator.forSupportFragment(this).initiateScan()
+                IntentIntegrator.forSupportFragment(this@BookSeatFragment)
+                    .setRequestCode(START_SCAN)
+                    .initiateScan()
             }
 
             btEndScan.setOnClickListener {
                 lifecycleScope.launch {
-                    observeSubmitSession()
+                    IntentIntegrator.forSupportFragment(this@BookSeatFragment)
+                        .setRequestCode(END_SCAN)
+                        .initiateScan()
                 }
-
             }
         }
-        observerData()
     }
 
     private fun observerData() {
@@ -110,23 +112,21 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
         })
     }
 
-    private suspend fun observeSubmitSession() {
-        viewModel.submit(testQr,System.currentTimeMillis()).observe(viewLifecycleOwner, {
+    private suspend fun observeSubmitSession(endScanQrRawData:String) {
+        viewModel.submit(endScanQrRawData, System.currentTimeMillis()).observe(viewLifecycleOwner, {
             when (it) {
                 is State.LoadingState -> {
                     disableButton()
-                    showProgress()
+                    longToast(R.string.loading)
                 }
 
                 is State.Success<*> -> {
                     enableButton()
-                    hideProgress()
                     shortToast(R.string.submission_success)
 
                 }
                 is State.ErrorState -> {
                     enableButton()
-                    hideProgress()
                     longToast(it.exception.message)
                 }
             }
@@ -138,16 +138,23 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result == null) {
             super.onActivityResult(requestCode, resultCode, data)
+            shortToast(R.string.qr_no_result)
         } else {
             if (result.contents == null) {
                 shortToast(R.string.qr_read_error)
             } else {
-                lifecycleScope.launch {
-                    // viewModel.parseScanResult(result.contents)
-                    // viewModel.parseScanResult("\"{\\\"location_id\\\":\\\"ButterKnifeLib-1234\\\",\\\"location_details\\\":\\\"ButterKnife Lib, 80 Feet Rd, Koramangala 1A Block, Bangalore\\\",\\\"price_per_min\\\":5.50}\"")
+                when(requestCode){
+                    START_SCAN->{
+                        lifecycleScope.launch {
+                            viewModel.bookSeat(result.contents)
+                        }
+                    }
+                    END_SCAN->{
+                        lifecycleScope.launch {
+                            observeSubmitSession(result.contents)
+                        }
+                    }
                 }
-                Log.d("onActivityResult", "${result.contents}")
-                shortToast(result.contents)
             }
         }
     }
@@ -167,11 +174,9 @@ class BookSeatFragment : Fragment(R.layout.fragment_book_seat) {
         }
     }
 
-    private fun showProgress() {
-        binding.groupLoading.visible()
+    companion object{
+        const val START_SCAN=1001
+        const val END_SCAN=1002
     }
 
-    private fun hideProgress() {
-        binding.groupLoading.gone()
-    }
 }

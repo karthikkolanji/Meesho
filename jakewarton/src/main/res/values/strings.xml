@@ -9,6 +9,7 @@
     <string name="total_charges">Charges : %1$s</string>
     <string name="duration"> Duration: Hour %1$s Minutes: %2$s Seconds: %3$s</string>
     <string name="qr_read_error">Error in reading QR code!</string>
+    <string name="qr_no_result">No data found in QR code!</string>
     <string name="submission_success">Data submitted successfully</string>
     <string name="submission_error">Error occurred while submitting data</string>
     <string name="loading">Submitting data. Please wait…</string>

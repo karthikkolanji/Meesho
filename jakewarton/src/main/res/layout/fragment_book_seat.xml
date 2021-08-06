@@ -69,28 +69,6 @@
        app:layout_constraintTop_toBottomOf="@+id/tvDuration"/>
 
 
-   <ProgressBar
-       android:id="@+id/progress"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintBottom_toTopOf="@+id/tvLoading"
-       android:layout_width="50dp"
-       android:layout_height="50dp" />
-
-   <TextView
-       android:id="@+id/tvLoading"
-       android:layout_width="0dp"
-       android:layout_height="wrap_content"
-       android:textColor="@android:color/black"
-       android:textSize="@dimen/tv_medium"
-       android:layout_marginTop="4dp"
-       android:layout_marginBottom="16dp"
-       android:gravity="center"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintBottom_toTopOf="@+id/btEndScan"
-       android:text="@string/loading" />
-
    <Button
        android:id="@+id/btScanNow"
        android:layout_width="wrap_content"
@@ -109,14 +87,6 @@
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent" />
-
-   <androidx.constraintlayout.widget.Group
-       android:id="@+id/groupLoading"
-       android:visibility="gone"
-       app:constraint_referenced_ids="progress,tvLoading"
-       android:layout_width="0dp"
-       android:layout_height="0dp"/>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
