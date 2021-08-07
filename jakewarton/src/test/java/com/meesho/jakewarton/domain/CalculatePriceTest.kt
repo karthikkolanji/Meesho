@@ -78,7 +78,6 @@ class CalculatePriceTest {
     @Test
     fun `test should fail on incorrect amount`() = runBlocking {
 
-        val expectedDuration = 3 // 2 minutes
         val expectedAmount = 15
         val startTime = System.currentTimeMillis()
         val endTime = startTime + 120000 // making session of 2 minutes
@@ -94,9 +93,8 @@ class CalculatePriceTest {
         val session = repository.getSession()
 
         val duration = (session.end_time - session.start_time) / 60000
-        Truth.assertThat(duration).isNotEqualTo(expectedDuration)
-
         val amount = session.price_per_min * duration
+
         Truth.assertThat(amount).isNotEqualTo(expectedAmount)
 
         coVerify(exactly = 1) { repository.getSession() }
