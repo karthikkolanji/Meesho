@@ -47,7 +47,7 @@ Download the [APK file from here](https://test_link?raw=true) on your Android ph
 ## 👨 Developed By
 
 <a href="https://twitter.com/kolanji_karthik" target="_blank">
-  <img src="https://avatars1.githubusercontent.com/u/8867121?s=460&v=4" width="70" align="left">
+  <img src="https://avatars.githubusercontent.com/u/8638991?v=4" width="70" align="left">
 </a>
 
 **Karthik Kolanji**
