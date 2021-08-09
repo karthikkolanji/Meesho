@@ -5,10 +5,7 @@ An simple library seat booking app utilizing Qr reader library.
 
 <div align="center">
   <sub>Built with ❤︎ by
-  <a href="https://twitter.com/kolanji_karthik">Karthik Kolanji</a> and
-  <a href="https://github.com/karthikkolanji/Meesho/graphs/contributors">
-    contributors
-  </a>
+  <a href="https://twitter.com/kolanji_karthik">Karthik Kolanji</a>
 </div>
 <br/>
 
